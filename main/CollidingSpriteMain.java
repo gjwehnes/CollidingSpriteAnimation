@@ -1,5 +1,5 @@
 
-public class Main {
+public class CollidingSpriteMain {
 	
 	public static void main(String[] args)
 	{
