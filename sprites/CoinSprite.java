@@ -91,11 +91,4 @@ public class CoinSprite implements DisplayableSprite {
 			
 	}
 
-
-	@Override
-	public void setDispose() {
-		// TODO Auto-generated method stub
-		
-	}
-
 }
