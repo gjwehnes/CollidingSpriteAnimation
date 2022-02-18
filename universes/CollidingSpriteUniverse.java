@@ -41,7 +41,7 @@ public class CollidingSpriteUniverse implements Universe {
 					sprites.add(player1);					
 				}
 				else if (row == ROWS - 1 && col == COLS -1) {
-					sprites.add(new ExitSprite(minX, minY, minX  + COL_WIDTH, minX + ROW_HEIGHT, true));
+					sprites.add(new ExitSprite(minX - + COL_WIDTH / 2, minY - COL_WIDTH / 2, minX  + COL_WIDTH / 2, minX + ROW_HEIGHT / 2, true));
 				}
 				else if (row == (ROWS / 2) && col == (COLS / 2)) {
 					sprites.add(new OtherSprite(minX + COL_WIDTH / 2 + 8, minY + ROW_HEIGHT / 2 + 8));
@@ -100,7 +100,7 @@ public class CollidingSpriteUniverse implements Universe {
 		this.complete = complete;
 	}
 	
-	public Background getBackground() {
+	public ArrayList<Background> getBackgrounds() {
 		return null;
 	}
 
@@ -143,8 +143,8 @@ public class CollidingSpriteUniverse implements Universe {
 			
 			if (sprite instanceof MovableSprite) {
 				MovableSprite movable = (MovableSprite)sprite;
-				movable.moveX(velocityX);
-				movable.moveY(velocityY);
+				movable.setVelocityX(velocityX);
+				movable.setVelocityY(velocityY);
 			}
 			
 			sprite.update(this, null, actual_delta_time);
@@ -188,6 +188,5 @@ public class CollidingSpriteUniverse implements Universe {
     		disposalList.clear();
     	}
     }
-
 
 }
