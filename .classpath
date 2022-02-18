@@ -5,6 +5,7 @@
 	<classpathentry kind="src" path="sprites"/>
 	<classpathentry kind="src" path="main"/>
 	<classpathentry kind="src" path="animations"/>
+	<classpathentry kind="src" path="gui"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/AnimationShell"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
