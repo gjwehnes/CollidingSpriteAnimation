@@ -100,7 +100,7 @@ public class CollidingSpriteUniverse implements Universe {
 		this.complete = complete;
 	}
 	
-	public Background getBackground() {
+	public ArrayList<Background> getBackgrounds() {
 		return null;
 	}
 
@@ -188,6 +188,5 @@ public class CollidingSpriteUniverse implements Universe {
     		disposalList.clear();
     	}
     }
-
 
 }
