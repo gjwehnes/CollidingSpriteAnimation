@@ -18,18 +18,18 @@ public class CollidingSpriteUniverse implements Universe {
 
 	public CollidingSpriteUniverse () {
 
-		double screenMinX = AnimationFrame.SCREEN_WIDTH / -2;
-		double screenMinY = AnimationFrame.SCREEN_HEIGHT / -2;
-		double screenMaxX = AnimationFrame.SCREEN_WIDTH / 2;
-		double screenMaxY = AnimationFrame.SCREEN_HEIGHT / 2;
+		double screenMinX = AnimationFrameSub.SCREEN_WIDTH / -2;
+		double screenMinY = AnimationFrameSub.SCREEN_HEIGHT / -2;
+		double screenMaxX = AnimationFrameSub.SCREEN_WIDTH / 2;
+		double screenMaxY = AnimationFrameSub.SCREEN_HEIGHT / 2;
 		
 		//create random maze
 		final int ROWS = 8;
 		final int COLS = 8;
 		final double BARRIER_FREQUENCY = 0.2;
 		final double COIN_FREQUENCY = 0.4;
-		final double COL_WIDTH = (AnimationFrame.SCREEN_WIDTH - 16) / (float)COLS; 
-		final double ROW_HEIGHT = (AnimationFrame.SCREEN_HEIGHT - 16) / (float)ROWS; 
+		final double COL_WIDTH = (AnimationFrameSub.SCREEN_WIDTH - 16) / (float)COLS; 
+		final double ROW_HEIGHT = (AnimationFrameSub.SCREEN_HEIGHT - 16) / (float)ROWS; 
 
 		Random random = new Random(1);
 		for (int row = 0; row < ROWS; row++) {
