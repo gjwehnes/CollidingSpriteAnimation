@@ -54,6 +54,20 @@ public class AnimationFrame extends JFrame {
 	public AnimationFrame(Animation animation)
 	{
 		super("");
+		getContentPane().addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				thisContentPane_mousePressed(e);
+			}
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				thisContentPane_mouseReleased(e);
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				contentPane_mouseExited(e);
+			}
+		});
 		
 		this.animation = animation;
 		this.setVisible(true);		
@@ -80,6 +94,10 @@ public class AnimationFrame extends JFrame {
 		getContentPane().addMouseMotionListener(new MouseMotionAdapter() {
 			@Override
 			public void mouseMoved(MouseEvent e) {
+				contentPane_mouseMoved(e);
+			}
+			@Override
+			public void mouseDragged(MouseEvent e) {
 				contentPane_mouseMoved(e);
 			}
 		});
@@ -151,8 +169,6 @@ public class AnimationFrame extends JFrame {
 			backgrounds = universe.getBackgrounds();
 			centreOnPlayer = universe.centerOnPlayer();
 			this.scale = universe.getScale();
-			this.logicalCenterX = universe.getXCenter();
-			this.logicalCenterY = universe.getYCenter();
 
 			// main game loop
 			while (stop == false && universe.isComplete() == false) {
@@ -182,14 +198,21 @@ public class AnimationFrame extends JFrame {
 				handleKeyboardInput();
 
 				//UPDATE STATE
-				updateTime();
-				
+				updateTime();				
 				universe.update(keyboard, actual_delta_time);
-				updateControls();
+				
+				//align animation frame with logical universe
+				if (player1 != null && centreOnPlayer) {
+					this.logicalCenterX = player1.getCenterX();
+					this.logicalCenterY = player1.getCenterY();     
+				}
+				else {
+					this.logicalCenterX = universe.getXCenter();
+					this.logicalCenterY = universe.getYCenter();
+				}
 
 				//REFRESH
-				this.logicalCenterX = universe.getXCenter();
-				this.logicalCenterY = universe.getYCenter();
+				updateControls();
 				this.repaint();
 			}
 
@@ -205,7 +228,7 @@ public class AnimationFrame extends JFrame {
 	}
 
 	private void updateControls() {
-
+				
 		this.lblTop.setText(String.format("Time: %9.3f;  Score: %6d; Message: %s", elapsed_time / 1000.0, ((CollidingSprite)player1).getScore(), ((CollidingSprite)player1).getProximityMessage() ) );
 		this.lblBottom.setText(Integer.toString(universeLevel));
 		if (universe != null) {
@@ -244,24 +267,25 @@ public class AnimationFrame extends JFrame {
 		}
 		if (keyboard.keyDown(112)) {
 			scale *= 1.01;
+			contentPane_mouseMoved(null);
 		}
 		if (keyboard.keyDown(113)) {
 			scale /= 1.01;
+			contentPane_mouseMoved(null);
 		}
 		
 		if (keyboard.keyDown(65)) {
-			screenCenterX -= 1;
-		}
-		if (keyboard.keyDown(68)) {
 			screenCenterX += 1;
 		}
-		if (keyboard.keyDown(83)) {
-			screenCenterY -= 1;
+		if (keyboard.keyDown(68)) {
+			screenCenterX -= 1;
 		}
-		if (keyboard.keyDown(88)) {
+		if (keyboard.keyDown(83)) {
 			screenCenterY += 1;
 		}
-		
+		if (keyboard.keyDown(88)) {
+			screenCenterY -= 1;
+		}		
 	}
 
 	class DrawPanel extends JPanel {
@@ -270,11 +294,6 @@ public class AnimationFrame extends JFrame {
 		{	
 			if (universe == null) {
 				return;
-			}
-
-			if (player1 != null && centreOnPlayer) {
-				logicalCenterX = player1.getCenterX();
-				logicalCenterY = player1.getCenterY();     
 			}
 
 			if (backgrounds != null) {
@@ -375,15 +394,49 @@ public class AnimationFrame extends JFrame {
 	}
 	
 	protected void contentPane_mouseMoved(MouseEvent e) {
-		MouseInput.screenX = e.getX();
-		MouseInput.screenY = e.getY();
-		MouseInput.logicalX = translateToLogicalX(MouseInput.screenX);
-		MouseInput.logicalY = translateToLogicalY(MouseInput.screenY);
+//		MouseInput.screenX = e.getX();
+//		MouseInput.screenY = e.getY();
+		Point point = this.getContentPane().getMousePosition();
+		if (point != null) {
+			MouseInput.screenX = point.x;		
+			MouseInput.screenY = point.y;
+			MouseInput.logicalX = translateToLogicalX(MouseInput.screenX);
+			MouseInput.logicalY = translateToLogicalY(MouseInput.screenY);
+		}
+		else {
+			MouseInput.screenX = -1;		
+			MouseInput.screenY = -1;
+			MouseInput.logicalX = Double.NaN;
+			MouseInput.logicalY = Double.NaN;
+		}
+	}
+	
+	protected void thisContentPane_mousePressed(MouseEvent e) {
+		if (e.getButton() == MouseEvent.BUTTON1) {
+			MouseInput.leftButtonDown = true;
+		} else if (e.getButton() == MouseEvent.BUTTON3) {
+			MouseInput.rightButtonDown = true;
+		} else {
+			System.out.println(e.getButton());
+			//DO NOTHING
+		}
+	}
+	protected void thisContentPane_mouseReleased(MouseEvent e) {
+		if (e.getButton() == MouseEvent.BUTTON1) {
+			MouseInput.leftButtonDown = false;
+		} else if (e.getButton() == MouseEvent.BUTTON3) {
+			MouseInput.rightButtonDown = false;
+		} else {
+			//DO NOTHING
+		}
 	}
 
 	protected void this_windowClosing(WindowEvent e) {
 		System.out.println("windowClosing()");
 		stop = true;
 		dispose();	
+	}
+	protected void contentPane_mouseExited(MouseEvent e) {
+		contentPane_mouseMoved(e);
 	}
 }
