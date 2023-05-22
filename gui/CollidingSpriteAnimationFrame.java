@@ -16,7 +16,7 @@ public class CollidingSpriteAnimationFrame extends AnimationFrame{
 		
 		CollidingSprite player1 = (CollidingSprite)universe.getPlayer1();
 		
-		this.lblTop.setText(String.format("Time: %9.3f;  Score: %6d; Message: %s", elapsed_time / 1000.0, player1.getScore(), player1.getProximityMessage() ) );	
+		this.lblTop.setText(String.format("Time: %9.3f;  Score: %6d; Message: %s", total_elapsed_time / 1000.0, player1.getScore(), player1.getProximityMessage() ) );	
 		this.lblBottom.setText(Integer.toString(universeLevel));
 		if (universe != null) {
 			this.lblBottom.setText(universe.toString());
