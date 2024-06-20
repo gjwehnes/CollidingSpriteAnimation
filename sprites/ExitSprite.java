@@ -110,12 +110,7 @@ public class ExitSprite implements DisplayableSprite {
 	    	currentAngle += 360;
 	    }
 	    
-	    int frame = (int)currentAngle;
-	    if (rotatedImages[frame] != null) {
-		    this.height = rotatedImages[frame].getHeight(null);
-		    this.width = rotatedImages[frame].getWidth(null);
-	    }
-			
+	    int frame = (int)currentAngle;			
 	}
 
 }
