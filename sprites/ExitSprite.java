@@ -101,7 +101,7 @@ public class ExitSprite implements DisplayableSprite {
 	}
 
 
-	public void update(Universe universe, KeyboardInput keyboard, long actual_delta_time) {
+	public void update(Universe universe, long actual_delta_time) {
 		currentAngle -= (ROTATION_SPEED * (actual_delta_time * 0.001));
 	    if (currentAngle >= 360) {
 	    	currentAngle -= 360;

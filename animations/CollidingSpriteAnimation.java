@@ -40,7 +40,7 @@ public class CollidingSpriteAnimation implements Animation {
 	}
 
 	@Override
-	public void update(KeyboardInput keyboard, long actual_delta_time) {
+	public void update(AnimationFrame frame, long actual_delta_time) {
 	}
 	
 }

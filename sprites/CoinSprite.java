@@ -87,7 +87,7 @@ public class CoinSprite implements DisplayableSprite {
 		this.dispose = dispose;
 	}
 
-	public void update(Universe universe, KeyboardInput keyboard, long actual_delta_time) {
+	public void update(Universe universe, long actual_delta_time) {
 			
 	}
 
