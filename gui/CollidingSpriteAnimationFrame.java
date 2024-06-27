@@ -14,7 +14,7 @@ public class CollidingSpriteAnimationFrame extends AnimationFrame{
 
 		System.out.println("Override!");
 		
-		CollidingSprite player1 = (CollidingSprite)universe.getPlayer1();
+		CollidingSprite player1 = ((CollidingSpriteUniverse)universe).getPlayer1();
 		
 		this.lblTop.setText(String.format("Time: %9.3f;  Score: %6d; Message: %s", total_elapsed_time / 1000.0, player1.getScore(), player1.getProximityMessage() ) );	
 		if (universe != null) {

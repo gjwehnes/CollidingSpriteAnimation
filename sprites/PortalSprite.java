@@ -4,7 +4,7 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-public class ExitSprite implements DisplayableSprite {
+public class PortalSprite implements DisplayableSprite {
 
 	private static Image image;
 	private boolean visible = true;
@@ -20,7 +20,7 @@ public class ExitSprite implements DisplayableSprite {
 	private static Image[] rotatedImages = new Image[FRAMES];
 	private static boolean framesLoaded = false;
 	
-	public ExitSprite(double minX, double minY, double maxX, double maxY, boolean visible) {
+	public PortalSprite(double minX, double minY, double maxX, double maxY, boolean visible) {
 		
 		if (framesLoaded == false) {
 			try {

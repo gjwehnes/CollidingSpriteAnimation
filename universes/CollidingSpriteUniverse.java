@@ -6,7 +6,7 @@ public class CollidingSpriteUniverse implements Universe {
 
 	private boolean complete = false;
 	private boolean teleport = false;
-	private DisplayableSprite player1 = null;
+	private CollidingSprite player1 = null;
 	private ArrayList<DisplayableSprite> sprites = new ArrayList<DisplayableSprite>();	
 	private String status = "";
 
@@ -38,10 +38,10 @@ public class CollidingSpriteUniverse implements Universe {
 				double minY = screenMinY + (row * ROW_HEIGHT);
 				if (row == 0 && col == 0) {
 					player1 = new ABCSprite(minX + COL_WIDTH / 2 + 8, minY + ROW_HEIGHT / 2 + 8);
-					sprites.add(player1);					
+					sprites.add((DisplayableSprite) player1);					
 				}
 				else if (row == ROWS - 1 && col == COLS -1) {
-					sprites.add(new ExitSprite(minX - + COL_WIDTH / 2, minY - COL_WIDTH / 2, minX  + COL_WIDTH / 2, minX + ROW_HEIGHT / 2, true));
+					sprites.add(new PortalSprite(minX - + COL_WIDTH / 2, minY - COL_WIDTH / 2, minX  + COL_WIDTH / 2, minX + ROW_HEIGHT / 2, true));
 				}
 				else if (row == (ROWS / 2) && col == (COLS / 2)) {
 					sprites.add(new OtherSprite(minX + COL_WIDTH / 2 + 8, minY + ROW_HEIGHT / 2 + 8));
@@ -104,7 +104,7 @@ public class CollidingSpriteUniverse implements Universe {
 		return null;
 	}
 
-	public DisplayableSprite getPlayer1() {
+	public CollidingSprite getPlayer1() {
 		return player1;
 	}
 
