@@ -180,7 +180,6 @@ public class CollidingSpriteUniverse implements Universe {
 		for (int i = 0; i < disposalList.size(); i++) {
 			DisplayableSprite sprite = disposalList.get(i);
 			sprites.remove(sprite);
-			System.out.println("Remove: " + sprite.toString());
     	}
 		
 		//clear disposal list if necessary
@@ -190,3 +189,4 @@ public class CollidingSpriteUniverse implements Universe {
     }
 
 }
+
