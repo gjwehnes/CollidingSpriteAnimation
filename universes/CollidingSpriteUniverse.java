@@ -1,7 +1,6 @@
 import java.util.ArrayList;
 import java.util.Random;
 
-//2020-10-27
 public class CollidingSpriteUniverse implements Universe {
 
 	private boolean complete = false;
@@ -189,4 +188,5 @@ public class CollidingSpriteUniverse implements Universe {
     }
 
 }
+
 
